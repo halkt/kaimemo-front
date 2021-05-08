@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import ItemList from '../components/ItemList'
 
 export default function Home() {
   return (
@@ -17,12 +17,11 @@ export default function Home() {
           Welcome to Kaimemo!
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <ItemList />
+        <h2>
+          <Link href="/items/list">
+            <a>Let's Go Sample</a>
+          </Link>
+        </h2>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
