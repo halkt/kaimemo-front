@@ -6,9 +6,9 @@ import Filter from './Filter';
 export default function ItemList() {
   const getKey = () => Math.random().toString(32).substring(2);
   const [items, setItems] = useState([
-    { key: getKey(), text: 'Learn JavaScript', done: false },
-    { key: getKey(), text: 'Learn React', done: false },
-    { key: getKey(), text: 'Hoge', done: false },
+    { key: getKey(), text: 'たまねぎ', type: '野菜', done: false },
+    { key: getKey(), text: 'にんじん', type: '野菜', done: false },
+    { key: getKey(), text: '味噌', type: '調味料', done: false },
   ]);
   const handleCheck = checkedItem => {
     const newItems = items.map(item => {
@@ -33,7 +33,10 @@ export default function ItemList() {
   return (
     <div className="panel">
       <div className="panel-heading">
-        ⚛️ React ToDo
+        Kaimono Memo
+      </div>
+      <div className="panel-block">
+        {displayItems.length} items
       </div>
       <Input onAdd={handleAdd}/>
       <Filter
@@ -47,9 +50,6 @@ export default function ItemList() {
           onCheck={handleCheck}
         />
       ))}
-      <div className="panel-block">
-        {displayItems.length} items
-      </div>
     </div>
   );
 }

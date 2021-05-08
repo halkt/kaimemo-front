@@ -13,7 +13,7 @@ export default function Item({ item, onCheck }) {
       <span
         className={item.done ? 'done-item' : ''}
       >
-        {item.text}
+        {item.text} {item.type}
       </span>
     </label>
   );
