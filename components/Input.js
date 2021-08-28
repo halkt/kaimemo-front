@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 export default function Input({ onAdd }) {
-  const [text, setText] = useState('');
+  const [name, setText] = useState('');
   const handleChange = e => setText(e.target.value);
   const handleKeyDown = e => {
     if (e.key === 'Enter') {
-      onAdd(text);
+      onAdd(name);
       setText('');
     }
   };
@@ -16,7 +16,7 @@ export default function Input({ onAdd }) {
         class="input"
         type="text"
         placeholder="Enter to add"
-        value={text}
+        value={name}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
