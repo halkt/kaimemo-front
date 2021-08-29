@@ -7,13 +7,13 @@ export default function Item({ item, onCheck }) {
     <label className="panel-block">
       <input
         type="checkbox"
-        checked={item.done}
+        checked={item.purchased}
         onChange={handleChange}
       />
       <span
-        className={item.done ? 'done-item' : ''}
+        className={item.purchased ? 'done-item' : ''}
       >
-        {item.text} {item.type}
+        {item.name} {item.type}
       </span>
     </label>
   );
