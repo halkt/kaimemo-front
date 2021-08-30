@@ -19,7 +19,7 @@ export default function List({ items }) {
 
 export const getStaticProps = async () => {
   // GASのデータ取得
-  const url = 'https://script.google.com/macros/s/AKfycbyJ6axYNe0QM1cvGgTxpd4R6CUlws-1hO4Q1aMJKT440Okbcb65W2jM3ooq4oUNwakWBw/exec'
+  const url = 'https://script.google.com/macros/s/AKfycbwhodlUv89ymI_fQ7Umkw5Z4JFa2ySYMNqwW0QyhDHybwU8r6RiZxgZ6YyIK_-FFGpE2w/exec'
   const res = await fetch(url, { redirect: 'follow' })
   const items = await res.json()
 
