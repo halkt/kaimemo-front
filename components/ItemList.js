@@ -16,7 +16,7 @@ export default function ItemList(props) {
     setItems(newItems);
   };
   const postItem = (targerItem) => {
-    fetch('https://script.google.com/macros/s/AKfycbwhodlUv89ymI_fQ7Umkw5Z4JFa2ySYMNqwW0QyhDHybwU8r6RiZxgZ6YyIK_-FFGpE2w/exec', {
+    fetch(process.env.gasApiEndPoint, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
