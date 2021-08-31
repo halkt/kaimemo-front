@@ -15,8 +15,37 @@ export default function ItemList(props) {
     });
     setItems(newItems);
   };
+  const postItem = (targerItem) => {
+    fetch(process.env.gasApiEndPoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: targerItem.name,
+        icon: targerItem.icon,
+        type: targerItem.type,
+        purchased: targerItem.purchased
+      })
+    }).then(function(response) {
+      // レスポンス結果
+    }, function(error) {
+      // エラー内容
+    });
+  };
   const handleAdd = name => {
-    setItems([...items, { key: getKey(), name, purchased: false}])
+    const timeStamp = '2021-08-30';
+    const targetObject = {
+      key: getKey(),
+      name,
+      type: '',
+      purchased: false,
+      created_at: timeStamp,
+      updated_at: timeStamp
+    };
+    postItem(targetObject)
+    setItems([...items, targetObject])
   };
   const [filter, setFilter] = useState('ALL');
   const handleFileterChange = value => setFilter(value);
