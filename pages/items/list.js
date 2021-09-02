@@ -19,7 +19,7 @@ export default function List({ items }) {
 
 export const getStaticProps = async () => {
   // GASのデータ取得
-  const res = await fetch(process.env.gasApiEndPoint, { redirect: 'follow' })
+  const res = await fetch(process.env.gasApiEndPoint + '?mode=item', { redirect: 'follow' })
   const items = await res.json()
 
   return {

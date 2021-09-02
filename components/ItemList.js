@@ -5,7 +5,11 @@ import Filter from './Filter';
 
 export default function ItemList(props) {
   const getKey = () => Math.random().toString(32).substring(2);
-  const [items, setItems] = useState(props.items);
+  const sortedItems = props.items.sort((target, nextTarget) => {
+    if(target.type === nextTarget.type) return -1;
+    return 0;
+  })
+  const [items, setItems] = useState(sortedItems);
   const handleCheck = checkedItem => {
     const newItems = items.map(item => {
       if (item.key === checkedItem.key) {
