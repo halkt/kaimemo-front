@@ -1,6 +1,6 @@
-export default function Item({ item, onCheck }) {
+export default function Item({ item, type, onCheck }) {
   const handleChange = () => {
-    onCheck(item);
+    onCheck(item, type);
   };
 
   return (
