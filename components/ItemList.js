@@ -1,32 +1,20 @@
 import { useState } from 'react'
-import Item from './Item';
-import Input from './Input';
+import ItemType from './ItemType';
 import Filter from './Filter';
 
 export default function ItemList(props) {
-  const getKey = () => Math.random().toString(32).substring(2);
-  const sortedItems = props.items.sort((target, nextTarget) => {
-    if(target.type === nextTarget.type) return -1;
-    return 0;
-  })
-  const [items, setItems] = useState(sortedItems);
-  const handleCheck = checkedItem => {
-    const newItems = items.map(item => {
-      if (item.key === checkedItem.key) {
-        item.purchased = !item.purchased;
-      }
-      return item;
-    });
-    setItems(newItems);
-  };
-  const postItem = (targerItem) => {
+  const [types, setTypes] = useState(props.types);
+  const postItem = (targerItem, mode) => {
     fetch(process.env.gasApiEndPoint, {
       method: 'POST',
       mode: 'no-cors',
+      redirect: 'follow',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        mode: mode,
+        key: targerItem.key,
         name: targerItem.name,
         icon: targerItem.icon,
         type: targerItem.type,
@@ -34,48 +22,55 @@ export default function ItemList(props) {
       })
     }).then(function(response) {
       // レスポンス結果
+      console.log({ status: 'ok', mode: mode, item: targerItem, response: response })
     }, function(error) {
-      // エラー内容
+      console.log(error)
     });
   };
-  const handleAdd = name => {
+  const handleCheck = (checkedItem, checkType) => {
+    let changeItem = {}
+    checkType.items = checkType.items.map(item => {
+      if (item.key === checkedItem.key) {
+        item.purchased = !item.purchased;
+        changeItem = item
+      }
+      return item;
+    });
+    setTypes([...types, checkType])
+    postItem(changeItem, 'update')
+  };
+  const handleAdd = (name, type) => {
     const timeStamp = '2021-08-30';
     const targetObject = {
-      key: getKey(),
       name,
-      type: '',
+      type: type.type,
       purchased: false,
       created_at: timeStamp,
       updated_at: timeStamp
     };
-    postItem(targetObject)
-    setItems([...items, targetObject])
+    type.items.push(targetObject)
+    setTypes([...types])
+    postItem(targetObject, 'add')
   };
   const [filter, setFilter] = useState('ALL');
   const handleFileterChange = value => setFilter(value);
-  const displayItems = items.filter(item => {
-    if (filter === 'ALL') return true;
-    if (filter === 'TODO') return !item.purchased;
-    if (filter === 'DONE') return item.purchased;
-  });
 
   return (
     <div className="panel">
       <div className="panel-heading">
         Kaimono Memo
       </div>
-      <div className="panel-block">
-        {displayItems.length} items
-      </div>
-      <Input onAdd={handleAdd}/>
       <Filter
         value={filter}
         onChange={handleFileterChange}
       />
-      {displayItems.map(item => (
-        <Item
-          item={item}
+      {types.map(type => (
+        <ItemType
+          key={type.order_num}
+          type={type}
+          filter={filter}
           onCheck={handleCheck}
+          onAdd={handleAdd}
         />
       ))}
     </div>
