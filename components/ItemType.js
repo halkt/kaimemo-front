@@ -1,7 +1,7 @@
 import Item from './Item';
 import Input from './Input';
 
-export default function ItemType({ type, filter, onCheck, onAdd }) {
+export default function ItemType({ type, filter, onCheck, onInput, onAdd }) {
   const displayItems = type.items.filter(item => {
     if (filter === 'ALL') return true;
     if (filter === 'TODO') return !item.purchased;
@@ -18,6 +18,7 @@ export default function ItemType({ type, filter, onCheck, onAdd }) {
           item={item}
           type={type}
           onCheck={onCheck}
+          onInput={onInput}
         />
       ))}
       <Input

@@ -1,32 +1,10 @@
 import { useState } from 'react'
 import ItemType from './ItemType';
 import Filter from './Filter';
+import { postKaimemoGas } from '../api/postKaimemoGas';
 
 export default function ItemList(props) {
   const [types, setTypes] = useState(props.types);
-  const postItem = (targerItem, mode) => {
-    fetch(process.env.gasApiEndPoint, {
-      method: 'POST',
-      mode: 'no-cors',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        mode: mode,
-        key: targerItem.key,
-        name: targerItem.name,
-        icon: targerItem.icon,
-        type: targerItem.type,
-        purchased: targerItem.purchased
-      })
-    }).then(function(response) {
-      // レスポンス結果
-      console.log({ status: 'ok', mode: mode, item: targerItem, response: response })
-    }, function(error) {
-      console.log(error)
-    });
-  };
   const handleCheck = (checkedItem, checkType) => {
     let changeItem = {}
     checkType.items = checkType.items.map(item => {
@@ -36,8 +14,15 @@ export default function ItemList(props) {
       }
       return item;
     });
-    setTypes([...types, checkType])
-    postItem(changeItem, 'update')
+    setTypes([...types])
+    postKaimemoGas(changeItem, 'update')
+  };
+  const handleInput = (checkedItem, checkType) => {
+    checkType.items = checkType.items.map(item => {
+      return item;
+    });
+    setTypes([...types])
+    postKaimemoGas(checkedItem, 'update')
   };
   const handleAdd = (name, type) => {
     const timeStamp = '2021-08-30';
@@ -50,7 +35,7 @@ export default function ItemList(props) {
     };
     type.items.push(targetObject)
     setTypes([...types])
-    postItem(targetObject, 'add')
+    postKaimemoGas(targetObject, 'add')
   };
   const [filter, setFilter] = useState('ALL');
   const handleFileterChange = value => setFilter(value);
@@ -70,6 +55,7 @@ export default function ItemList(props) {
           type={type}
           filter={filter}
           onCheck={handleCheck}
+          onInput={handleInput}
           onAdd={handleAdd}
         />
       ))}
