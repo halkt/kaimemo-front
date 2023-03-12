@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styles from '../../styles/List.module.css'
 import ItemList from '../../components/ItemList'
+import { GetStaticProps } from 'next'
 
 export default function List({ items, types }) {
   console.log(items);
@@ -20,7 +21,7 @@ export default function List({ items, types }) {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (context) => {
   // GASのデータ取得
   const res = await fetch(process.env.gasApiEndPoint + '?mode=item', { redirect: 'follow' })
   const resType = await fetch(process.env.gasApiEndPoint + '?mode=itemByType', { redirect: 'follow' })
