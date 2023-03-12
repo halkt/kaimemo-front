@@ -3,6 +3,8 @@ import styles from '../../styles/List.module.css'
 import ItemList from '../../components/ItemList'
 
 export default function List({ items, types }) {
+  console.log(items);
+  console.log(types);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -11,9 +13,7 @@ export default function List({ items, types }) {
           types={types}
         />
         <h2>
-          <Link href="/">
-            <a>Back to home</a>
-          </Link>
+          <Link href="/">Back to home</Link>
         </h2>
       </main>
     </div>

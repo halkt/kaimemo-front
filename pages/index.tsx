@@ -19,7 +19,7 @@ export default function Home() {
 
         <h2>
           <Link href="/items/list">
-            <a>Let's Go Sample</a>
+            Let's Go Sample
           </Link>
         </h2>
 
