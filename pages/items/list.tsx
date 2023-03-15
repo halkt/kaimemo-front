@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import styles from '../../styles/List.module.css'
 import ItemList from '../../components/ItemList'
+import type { Item, ItemType, ItemListProps } from '../../components/ItemList'
 import { GetStaticProps } from 'next'
 
-export default function List({ items, types }) {
-  console.log(items);
-  console.log(types);
+export default function List({ items, types }: ItemListProps): JSX.Element {
   return (
     <div className={styles.container}>
       <main className={styles.main}>

@@ -1,4 +1,12 @@
-export const postKaimemoGas = (targerItem, mode) => {
+export type postGasItem = {
+  name: string
+  type: string
+  purchased: boolean
+  created_at: string
+  updated_at: string
+}
+
+export const postKaimemoGas = (targerItem: postGasItem, mode: string) => {
   // KaimemoアプリのバックエンドAPIを実行
   fetch(process.env.gasApiEndPoint, {
     method: 'POST',

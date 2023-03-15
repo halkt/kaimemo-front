@@ -1,12 +1,34 @@
 import { useState } from 'react'
 import ItemType from './ItemType';
 import Filter from './Filter';
-import { postKaimemoGas } from '../api/postKaimemoGas';
+import { postKaimemoGas, postGasItem } from '../api/postKaimemoGas';
+import Item from './Item';
+import { today } from '../utils/date';
 
-export default function ItemList(props) {
+export type Item = {
+  key: number
+  name: string
+  icon: string
+  purchased: boolean
+  created_at: any
+  updated_at: any
+}
+
+export type ItemType = {
+  type: string
+  order_num: number
+  items: Item[]
+}
+
+export type ItemListProps = {
+  items: [Item]
+  types: [ItemType]
+}
+
+export default function ItemList(props: ItemListProps): JSX.Element {
   const [types, setTypes] = useState(props.types);
-  const handleCheck = (checkedItem, checkType) => {
-    let changeItem = {}
+  const handleCheck = (checkedItem: Item, checkType: ItemType) => {
+    let changeItem: Item
     checkType.items = checkType.items.map(item => {
       if (item.key === checkedItem.key) {
         item.purchased = !item.purchased;
@@ -14,19 +36,26 @@ export default function ItemList(props) {
       }
       return item;
     });
+    const postItem: postGasItem = {
+      name: changeItem.name,
+      type: checkType.type,
+      purchased: changeItem.purchased,
+      created_at: changeItem.created_at,
+      updated_at: changeItem.updated_at,
+    } 
     setTypes([...types])
-    postKaimemoGas(changeItem, 'update')
+    postKaimemoGas(postItem, 'update')
   };
-  const handleInput = (checkedItem, checkType) => {
+  const handleInput = (checkedItem: postGasItem, checkType: ItemType) => {
     checkType.items = checkType.items.map(item => {
       return item;
     });
     setTypes([...types])
     postKaimemoGas(checkedItem, 'update')
   };
-  const handleAdd = (name, type) => {
-    const timeStamp = '2021-08-30';
-    const targetObject = {
+  const handleAdd = (name: string, type) => {
+    const timeStamp = today();
+    const targetObject: postGasItem = {
       name,
       type: type.type,
       purchased: false,
@@ -38,8 +67,7 @@ export default function ItemList(props) {
     postKaimemoGas(targetObject, 'add')
   };
   const [filter, setFilter] = useState('ALL');
-  const handleFileterChange = value => setFilter(value);
-
+  const handleFileterChange = (value: string) => setFilter(value);
   return (
     <div className="panel">
       <div className="panel-heading">
