@@ -39,6 +39,8 @@ export default function ItemList(props: ItemListProps): JSX.Element {
     const postItem: postGasItem = {
       name: changeItem.name,
       type: checkType.type,
+      key: changeItem.key,
+      icon: changeItem.icon,
       purchased: changeItem.purchased,
       created_at: changeItem.created_at,
       updated_at: changeItem.updated_at,
@@ -58,6 +60,8 @@ export default function ItemList(props: ItemListProps): JSX.Element {
     const targetObject: postGasItem = {
       name,
       type: type.type,
+      key: null,
+      icon: null,
       purchased: false,
       created_at: timeStamp,
       updated_at: timeStamp

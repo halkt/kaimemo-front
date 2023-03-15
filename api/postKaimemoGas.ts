@@ -1,12 +1,14 @@
 export type postGasItem = {
   name: string
   type: string
+  key: number | null
+  icon: string | null
   purchased: boolean
   created_at: string
   updated_at: string
 }
 
-export const postKaimemoGas = (targerItem: postGasItem, mode: string) => {
+export const postKaimemoGas = (item: postGasItem, mode: string) => {
   // KaimemoアプリのバックエンドAPIを実行
   fetch(process.env.gasApiEndPoint, {
     method: 'POST',
@@ -17,14 +19,19 @@ export const postKaimemoGas = (targerItem: postGasItem, mode: string) => {
     },
     body: JSON.stringify({
       mode: mode,
-      key: targerItem.key,
-      name: targerItem.name,
-      icon: targerItem.icon,
-      type: targerItem.type,
-      purchased: targerItem.purchased
+      key: item.key,
+      name: item.name,
+      icon: item.icon,
+      type: item.type,
+      purchased: item.purchased
     })
   }).then(function(response) {
-    console.log({ status: 'ok', mode: mode, item: targerItem, response: response })
+    console.log({
+      status: 'ok',
+      mode: mode,
+      item: item,
+      response: response
+    })
   }, function(error) {
     console.log(error)
   });
