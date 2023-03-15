@@ -1,7 +1,7 @@
 export default function Filter({ value, onChange }) {
-  const handleClick = (key, e) => {
-    e.preventDefault();
-    onChange(key);
+  const handleClick = (key: string, event: React.MouseEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    onChange(key)
   }
 
   return (

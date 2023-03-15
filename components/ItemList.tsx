@@ -60,8 +60,6 @@ export default function ItemList(props: ItemListProps): JSX.Element {
     const targetObject: postGasItem = {
       name,
       type: type.type,
-      key: null,
-      icon: null,
       purchased: false,
       created_at: timeStamp,
       updated_at: timeStamp

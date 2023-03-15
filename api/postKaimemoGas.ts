@@ -1,11 +1,11 @@
 export type postGasItem = {
   name: string
   type: string
-  key: number | null
-  icon: string | null
   purchased: boolean
   created_at: string
   updated_at: string
+  key?: number
+  icon?: string
 }
 
 export const postKaimemoGas = (item: postGasItem, mode: string) => {
