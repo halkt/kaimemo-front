@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 export default function Input({ type, onAdd }) {
   const [name, setText] = useState('');
-  const handleChange = e => setText(e.target.value);
-  const handleKeyDown = e => {
-    if (e.key === 'Enter') {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setText(event.target.value);
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
       onAdd(name, type);
       setText('');
     }
