@@ -3,7 +3,7 @@ import ItemType from './ItemType';
 import Filter from './Filter';
 import { postKaimemoGas, postGasItem } from '../api/postKaimemoGas';
 import Item from './Item';
-import { today } from '../utils/date';
+import { cdate } from 'cdate';
 
 export type Item = {
   key: number
@@ -56,7 +56,7 @@ export default function ItemList(props: ItemListProps): JSX.Element {
     postKaimemoGas(checkedItem, 'update')
   };
   const handleAdd = (name: string, type) => {
-    const timeStamp = today();
+    const timeStamp = cdate().format('YYYY-MM-DD');
     const targetObject: postGasItem = {
       name,
       type: type.type,
