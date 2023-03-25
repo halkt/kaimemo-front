@@ -15,32 +15,6 @@ a {
   box-sizing: border-box;
 }
 
-/* TODO: コピペなので後で整える */
-.panel-heading {
-  background-color: #ededed;
-  border-radius: 6px 6px 0 0;
-  color: #363636;
-  font-size: 1.25em;
-  font-weight: 700;
-  line-height: 1.25;
-  padding: .75em 1em;
-}
-
-.panel-block {
-  align-items: center;
-  color: #363636;
-  display: flex;
-  justify-content: flex-start;
-  padding: .5em .75em;
-}
-
-.panel-tabs {
-  align-items: flex-end;
-  display: flex;
-  font-size: .875em;
-  justify-content: center;
-}
-
 .is-active {
   border-bottom-color: #4a4a4a;
   font-weight: bold;

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from '../styles/List.module.css';
 
 export default function Input({ type, onAdd }) {
   const [name, setText] = useState('');
@@ -11,15 +12,13 @@ export default function Input({ type, onAdd }) {
   };
 
   return (
-    <div className="panel-block">
-      <input
-        className="input"
-        type="text"
-        placeholder="Enter to add"
-        value={name}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
-    </div>
+    <input
+      className="input"
+      type="text"
+      placeholder="Enter to add"
+      value={name}
+      onChange={handleChange}
+      onKeyDown={handleKeyDown}
+    />
   );
 }

@@ -1,5 +1,6 @@
 import Item from './Item';
 import Input from './Input';
+import styles from '../styles/List.module.css';
 
 export default function ItemType({ type, filter, onCheck, onInput, onAdd }) {
   const displayItems = type.items.filter(item => {
@@ -8,19 +9,21 @@ export default function ItemType({ type, filter, onCheck, onInput, onAdd }) {
     if (filter === 'DONE') return item.purchased;
   })
   return (
-    <div className="">
+    <div>
       <h3>
         {type.type}
       </h3>
-      {displayItems.map(item => (
-        <Item
-          key={item.key}
-          item={item}
-          type={type}
-          onCheck={onCheck}
-          onInput={onInput}
-        />
-      ))}
+      <div className={styles.itemContainer}>
+        {displayItems.map(item => (
+          <Item
+            key={item.key}
+            item={item}
+            type={type}
+            onCheck={onCheck}
+            onInput={onInput}
+          />
+        ))}
+      </div>
       <Input
         type={type}
         onAdd={onAdd}

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ItemType from './ItemType';
 import Filter from './Filter';
+import styles from '../styles/List.module.css';
 import { postKaimemoGas, postGasItem } from '../api/postKaimemoGas';
 import Item from './Item';
 import { cdate } from 'cdate';
@@ -70,9 +71,10 @@ export default function ItemList(props: ItemListProps): JSX.Element {
   };
   const [filter, setFilter] = useState('ALL');
   const handleFileterChange = (value: string) => setFilter(value);
+
   return (
-    <div className="panel">
-      <div className="panel-heading">
+    <div className={styles.panel}>
+      <div className={styles.title}>
         Kaimono Memo
       </div>
       <Filter

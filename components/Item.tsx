@@ -1,14 +1,17 @@
+import { BlockList } from 'net';
+import styles from '../styles/List.module.css';
+
 export default function Item({ item, type, onCheck, onInput }) {
   const handleCheck = () => {
     onCheck(item, type);
   };
-  const handleInput = e => {
-    item.name = e.target.value
+  const handleInput = (event: any) => {
+    item.name = event.target.value
     onInput(item, type);
   };
 
   return (
-    <label className="panel-block">
+    <label className={styles.card}>
       <input
         type="checkbox"
         checked={item.purchased}
