@@ -18,9 +18,7 @@ export default function Home() {
         </h1>
 
         <h2>
-          <Link href="/items/list">
-            Let's Go Sample
-          </Link>
+          <Link href="/items/list">Let&apos;s Go Sample</Link>
         </h2>
 
         <div className={styles.grid}>
