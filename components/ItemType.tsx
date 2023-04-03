@@ -1,32 +1,41 @@
 import Item from './Item';
 import Input from './Input';
+import type { ItemType as itemType } from './ItemList';
 import styles from '../styles/List.module.css';
 
-export default function ItemType({ type, filter, onCheck, onInput, onAdd }) {
-  const displayItems = type.items.filter(item => {
-    if (filter === 'ALL') return true;
-    if (filter === 'TODO') return !item.purchased;
-    if (filter === 'DONE') return item.purchased;
+type Props = {
+  type: itemType
+  filter: String
+  onCheck: any
+  onInput: any
+  onAdd: any
+}
+
+export default function ItemType(props: Props) {
+  const displayItems = props.type.items.filter(item => {
+    if (props.filter === 'ALL') return true;
+    if (props.filter === 'TODO') return !item.purchased;
+    if (props.filter === 'DONE') return item.purchased;
   })
   return (
     <div>
       <h3>
-        {type.type}
+        {props.type.type}
       </h3>
       <div className={styles.itemContainer}>
         {displayItems.map(item => (
           <Item
             key={item.key}
             item={item}
-            type={type}
-            onCheck={onCheck}
-            onInput={onInput}
+            type={props.type}
+            onCheck={props.onCheck}
+            onInput={props.onInput}
           />
         ))}
       </div>
       <Input
-        type={type}
-        onAdd={onAdd}
+        type={props.type}
+        onAdd={props.onAdd}
       />
     </div>
   );
