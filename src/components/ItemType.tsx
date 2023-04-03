@@ -1,7 +1,7 @@
-import Item from './Item';
-import Input from './Input';
-import type { ItemType as itemType } from './ItemList';
-import styles from '../styles/List.module.css';
+import Item from './Item'
+import Input from './Input'
+import type { ItemType as itemType } from './ItemList'
+import styles from '../styles/List.module.css'
 
 type Props = {
   type: itemType
@@ -12,18 +12,16 @@ type Props = {
 }
 
 export default function ItemType(props: Props) {
-  const displayItems = props.type.items.filter(item => {
-    if (props.filter === 'ALL') return true;
-    if (props.filter === 'TODO') return !item.purchased;
-    if (props.filter === 'DONE') return item.purchased;
+  const displayItems = props.type.items.filter((item) => {
+    if (props.filter === 'ALL') return true
+    if (props.filter === 'TODO') return !item.purchased
+    if (props.filter === 'DONE') return item.purchased
   })
   return (
     <div>
-      <h3>
-        {props.type.type}
-      </h3>
+      <h3>{props.type.type}</h3>
       <div className={styles.itemContainer}>
-        {displayItems.map(item => (
+        {displayItems.map((item) => (
           <Item
             key={item.key}
             item={item}
@@ -33,10 +31,7 @@ export default function ItemType(props: Props) {
           />
         ))}
       </div>
-      <Input
-        type={props.type}
-        onAdd={props.onAdd}
-      />
+      <Input type={props.type} onAdd={props.onAdd} />
     </div>
-  );
+  )
 }

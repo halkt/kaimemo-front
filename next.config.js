@@ -4,8 +4,9 @@ const nextConfig = {
     appDir: true,
   },
   env: {
-    gasApiEndPoint: 'https://script.google.com/macros/s/AKfycbzU4_jHD5f7mCOHe7NEzJRfQt7b56nzKOmLu8qh8zox68znpLlx2OxpC2IdzKCThRnUUQ/exec'
+    gasApiEndPoint:
+      'https://script.google.com/macros/s/AKfycbzU4_jHD5f7mCOHe7NEzJRfQt7b56nzKOmLu8qh8zox68znpLlx2OxpC2IdzKCThRnUUQ/exec',
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

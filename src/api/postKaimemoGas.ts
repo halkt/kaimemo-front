@@ -15,7 +15,7 @@ export const postKaimemoGas = (item: postGasItem, mode: string) => {
     mode: 'no-cors',
     redirect: 'follow',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       mode: mode,
@@ -23,16 +23,19 @@ export const postKaimemoGas = (item: postGasItem, mode: string) => {
       name: item.name,
       icon: item.icon,
       type: item.type,
-      purchased: item.purchased
-    })
-  }).then(function(response) {
-    console.log({
-      status: 'ok',
-      mode: mode,
-      item: item,
-      response: response
-    })
-  }, function(error) {
-    console.log(error)
-  });
+      purchased: item.purchased,
+    }),
+  }).then(
+    function (response) {
+      console.log({
+        status: 'ok',
+        mode: mode,
+        item: item,
+        response: response,
+      })
+    },
+    function (error) {
+      console.log(error)
+    },
+  )
 }
