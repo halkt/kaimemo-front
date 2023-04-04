@@ -1,3 +1,5 @@
+import styles from '../styles/List.module.css'
+
 export default function Filter({ value, onChange }) {
   const handleClick = (key: string, event: React.MouseEvent<HTMLInputElement>) => {
     event.preventDefault()
@@ -5,22 +7,28 @@ export default function Filter({ value, onChange }) {
   }
 
   return (
-    <div className="panel-tabs">
+    <div className={styles.tabs}>
       <a
-        href="#"
+        href='#'
         onClick={handleClick.bind(null, 'ALL')}
         className={value === 'ALL' ? 'is-active' : ''}
-      >All</a>
+      >
+        All
+      </a>
       <a
-        href="#"
+        href='#'
         onClick={handleClick.bind(null, 'TODO')}
         className={value === 'TODO' ? 'is-active' : ''}
-      >ToDo</a>
+      >
+        ToDo
+      </a>
       <a
-        href="#"
+        href='#'
         onClick={handleClick.bind(null, 'DONE')}
         className={value === 'DONE' ? 'is-active' : ''}
-      >Done</a>
+      >
+        Done
+      </a>
     </div>
   )
 }

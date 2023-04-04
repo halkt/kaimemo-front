@@ -8,12 +8,9 @@ export default function List({ items, types }: ItemListProps): JSX.Element {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <ItemList
-          items={items}
-          types={types}
-        />
+        <ItemList items={items} types={types} />
         <h2>
-          <Link href="/">Back to home</Link>
+          <Link href='/'>Back to home</Link>
         </h2>
       </main>
     </div>
@@ -23,14 +20,16 @@ export default function List({ items, types }: ItemListProps): JSX.Element {
 export const getStaticProps: GetStaticProps = async (context) => {
   // GASのデータ取得
   const res = await fetch(process.env.gasApiEndPoint + '?mode=item', { redirect: 'follow' })
-  const resType = await fetch(process.env.gasApiEndPoint + '?mode=itemByType', { redirect: 'follow' })
+  const resType = await fetch(process.env.gasApiEndPoint + '?mode=itemByType', {
+    redirect: 'follow',
+  })
   const items = await res.json()
   const types = await resType.json()
 
   return {
-    props: { 
+    props: {
       items,
-      types
-    }
+      types,
+    },
   }
 }

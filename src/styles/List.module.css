@@ -1,0 +1,50 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  background-color: #ededed;
+  border-radius: 6px 6px 0 0;
+  color: #363636;
+  font-size: 1.25em;
+  font-weight: 700;
+  line-height: 1.25;
+  padding: .75em 1em;
+  text-align: center;
+}
+
+.card {
+  display: flex;
+  width: 45%;
+  margin: .5em;
+  padding: .5em .75em;
+  border-radius: 6px 6px;
+  background-color: #afdfe4;
+  color: #363636;
+}
+
+.tabs {
+  align-items: flex-end;
+  display: flex;
+  font-size: .875em;
+  justify-content: center;
+}
+
+.itemContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
