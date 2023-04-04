@@ -10,7 +10,9 @@ export type postGasItem = {
 
 export const postKaimemoGas = (item: postGasItem, mode: string) => {
   // KaimemoアプリのバックエンドAPIを実行
-  fetch(process.env.gasApiEndPoint, {
+  // TODO: 無理やり突破
+  const url = process.env.gasApiEndPoint || ''
+  fetch(url, {
     method: 'POST',
     mode: 'no-cors',
     redirect: 'follow',

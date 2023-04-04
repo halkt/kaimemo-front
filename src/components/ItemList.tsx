@@ -29,22 +29,20 @@ export type ItemListProps = {
 export default function ItemList(props: ItemListProps): JSX.Element {
   const [types, setTypes] = useState(props.types)
   const handleCheck = (checkedItem: Item, checkType: ItemType) => {
-    let changeItem: Item
     checkType.items = checkType.items.map((item) => {
       if (item.key === checkedItem.key) {
         item.purchased = !item.purchased
-        changeItem = item
       }
       return item
     })
     const postItem: postGasItem = {
-      name: changeItem.name,
+      name: checkedItem.name,
       type: checkType.type,
-      key: changeItem.key,
-      icon: changeItem.icon,
-      purchased: changeItem.purchased,
-      created_at: changeItem.created_at,
-      updated_at: changeItem.updated_at,
+      key: checkedItem.key,
+      icon: checkedItem.icon,
+      purchased: checkedItem.purchased,
+      created_at: checkedItem.created_at,
+      updated_at: checkedItem.updated_at,
     }
     setTypes([...types])
     postKaimemoGas(postItem, 'update')
