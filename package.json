@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/node": "18.15.0",
     "@types/react": "^18.0.28",
+    "@types/react-modal": "^3.13.1",
     "eslint": "^8.37.0",
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.8.0",
