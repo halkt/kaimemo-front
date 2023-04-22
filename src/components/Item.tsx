@@ -1,5 +1,6 @@
 import { BlockList } from 'net'
 import { useState } from 'react'
+import { Button, Container } from '@mui/material'
 import styles from '../styles/List.module.css'
 import Modal from 'react-modal'
 
@@ -44,8 +45,12 @@ export default function Item({ item, type, onCheck, onInput }) {
           onInput={handleInput}
         />
         {/* {TODO: あとで足す} */}
-        <button onClick={handleCheck}>change</button>
-        <button onClick={closeModal}>close</button>
+        <Button variant='contained' color='primary' onClick={handleCheck}>
+          change
+        </Button>
+        <Button variant='contained' color='primary' onClick={closeModal}>
+          close
+        </Button>
       </Modal>
     </label>
   )
