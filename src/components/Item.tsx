@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Button, Container } from '@mui/material'
 import styles from '../styles/List.module.css'
-import Modal from 'react-modal'
+import ReactModal from 'react-modal'
 
-Modal.setAppElement('#__next')
+ReactModal.setAppElement('#__next')
 
 const customStyles = {
   content: {
@@ -22,9 +22,12 @@ export default function Item({ item, type, onCheck, onInput }) {
   const handleCheck = () => {
     onCheck(item, type)
   }
-
-  const handleInput = (event: any) => {
-    formData.name = event.target.value
+  const handleInputName = (event: any) => {
+    formData.name = event.currentTarget.value
+    setFormData(formData)
+  }
+  const handleInputIcon = (event: any) => {
+    formData.icon = event.currentTarget.value
     setFormData(formData)
   }
   const handleSubmit = (event: any) => {
@@ -53,18 +56,26 @@ export default function Item({ item, type, onCheck, onInput }) {
       <span className={styles.editIcon} onClick={openModal}>
         ✏️
       </span>
-      <Modal isOpen={editModalIsOpen} style={customStyles}>
+      <ReactModal isOpen={editModalIsOpen} style={customStyles}>
         <form onSubmit={handleSubmit}>
-          <input type='text' defaultValue={item.name} onInput={handleInput} />
-          <input type='text' defaultValue={item.icon} />
-          <Button type='submit' variant='contained' color='primary'>
-            change
-          </Button>
-          <Button variant='contained' color='primary' onClick={closeModal}>
-            close
-          </Button>
+          <div>
+            <span>名称</span>
+            <input type='text' defaultValue={item.name} onInput={handleInputName} />
+          </div>
+          <div>
+            <span>アイコン</span>
+            <input type='text' defaultValue={item.icon} onInput={handleInputIcon} />
+          </div>
+          <div>
+            <Button type='submit' variant='contained' color='primary'>
+              change
+            </Button>
+            <Button variant='contained' color='primary' onClick={closeModal}>
+              close
+            </Button>
+          </div>
         </form>
-      </Modal>
+      </ReactModal>
     </div>
   )
 }
