@@ -1,7 +1,9 @@
-import { BlockList } from 'net'
 import { useState } from 'react'
+import { Button, Container } from '@mui/material'
 import styles from '../styles/List.module.css'
-import Modal from 'react-modal'
+import ReactModal from 'react-modal'
+
+ReactModal.setAppElement('#__next')
 
 const customStyles = {
   content: {
@@ -16,15 +18,28 @@ const customStyles = {
 }
 
 export default function Item({ item, type, onCheck, onInput }) {
+  const [formData, setFormData] = useState(Object.assign({}, item))
   const handleCheck = () => {
-    // onCheck(item, type);
+    onCheck(item, type)
+  }
+  const handleInputName = (event: any) => {
+    formData.name = event.currentTarget.value
+    setFormData(formData)
+  }
+  const handleInputIcon = (event: any) => {
+    formData.icon = event.currentTarget.value
+    setFormData(formData)
+  }
+  const handleSubmit = (event: any) => {
+    event.preventDefault()
+    item.name = formData.name
+    item.icon = formData.icon
+    onInput(item, type)
+    setEditModalIsOpen(false)
+  }
+  const openModal = () => {
     setEditModalIsOpen(true)
   }
-  const handleInput = (event: any) => {
-    item.name = event.target.value
-    onInput(item, type)
-  }
-
   const closeModal = () => {
     setEditModalIsOpen(false)
   }
@@ -32,21 +47,35 @@ export default function Item({ item, type, onCheck, onInput }) {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
   return (
-    <label className={styles.card}>
-      <input type='checkbox' checked={item.purchased} onChange={handleCheck} />
-      <span className={item.purchased ? 'done-item' : ''}>{item.name}</span>
-      <span>{item.icon}</span>
-      <Modal isOpen={editModalIsOpen} style={customStyles}>
-        <input
-          className={item.purchased ? 'done-item' : ''}
-          type='text'
-          defaultValue={item.name}
-          onInput={handleInput}
-        />
-        {/* {TODO: あとで足す} */}
-        <button onClick={handleCheck}>change</button>
-        <button onClick={closeModal}>close</button>
-      </Modal>
-    </label>
+    <div className={styles.card}>
+      <label>
+        <input type='checkbox' checked={item.purchased} onChange={handleCheck} />
+        <span className={item.purchased ? 'done-item' : ''}>{item.name}</span>
+        <span>{item.icon}</span>
+      </label>
+      <span className={styles.editIcon} onClick={openModal}>
+        ✏️
+      </span>
+      <ReactModal isOpen={editModalIsOpen} style={customStyles}>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <span>名称</span>
+            <input type='text' defaultValue={item.name} onInput={handleInputName} />
+          </div>
+          <div>
+            <span>アイコン</span>
+            <input type='text' defaultValue={item.icon} onInput={handleInputIcon} />
+          </div>
+          <div>
+            <Button type='submit' variant='contained' color='primary'>
+              change
+            </Button>
+            <Button variant='contained' color='primary' onClick={closeModal}>
+              close
+            </Button>
+          </div>
+        </form>
+      </ReactModal>
+    </div>
   )
 }

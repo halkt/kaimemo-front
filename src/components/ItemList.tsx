@@ -47,12 +47,13 @@ export default function ItemList(props: ItemListProps): JSX.Element {
     setTypes([...types])
     postKaimemoGas(postItem, 'update')
   }
-  const handleInput = (checkedItem: postGasItem, checkType: ItemType) => {
-    checkType.items = checkType.items.map((item) => {
+  const handleInput = (taegetItem: postGasItem, targetType: ItemType) => {
+    targetType.items = targetType.items.map((item) => {
       return item
     })
     setTypes([...types])
-    postKaimemoGas(checkedItem, 'update')
+    // このあたりはuseEffectでやるべき?
+    postKaimemoGas(taegetItem, 'update')
   }
   const handleAdd = (name: string, type) => {
     const timeStamp = cdate().format('YYYY-MM-DD')
@@ -69,7 +70,6 @@ export default function ItemList(props: ItemListProps): JSX.Element {
   }
   const [filter, setFilter] = useState('ALL')
   const handleFileterChange = (value: string) => setFilter(value)
-
   return (
     <div className={styles.panel}>
       <div className={styles.title}>Kaimono Memo</div>
