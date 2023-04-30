@@ -5,6 +5,7 @@ import styles from '../styles/List.module.css'
 import { postKaimemoGas, postGasItem } from '../api/postKaimemoGas'
 import Item from './Item'
 import { cdate } from 'cdate'
+import TypeInput from './TypeInput'
 
 export type Item = {
   key: number
@@ -17,7 +18,7 @@ export type Item = {
 
 export type ItemType = {
   type: string
-  order_num: number
+  order_num?: number
   items: Item[]
 }
 
@@ -27,7 +28,7 @@ export type ItemListProps = {
 }
 
 export default function ItemList(props: ItemListProps): JSX.Element {
-  const [types, setTypes] = useState(props.types)
+  const [types, setTypes] = useState<ItemType[]>(props.types)
   const handleCheck = (checkedItem: Item, checkType: ItemType) => {
     checkType.items = checkType.items.map((item) => {
       if (item.key === checkedItem.key) {
@@ -68,6 +69,13 @@ export default function ItemList(props: ItemListProps): JSX.Element {
     setTypes([...types])
     postKaimemoGas(targetObject, 'add')
   }
+  const addNewType = (newTypeName: string) => {
+    const newType: ItemType = {
+      type: newTypeName,
+      items: [],
+    }
+    setTypes([...types, newType])
+  }
   const [filter, setFilter] = useState('ALL')
   const handleFileterChange = (value: string) => setFilter(value)
   return (
@@ -84,6 +92,7 @@ export default function ItemList(props: ItemListProps): JSX.Element {
           onAdd={handleAdd}
         />
       ))}
+      <TypeInput addNewType={addNewType} />
     </div>
   )
 }
