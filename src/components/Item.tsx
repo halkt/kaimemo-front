@@ -1,8 +1,9 @@
-import { BlockList } from 'net'
 import { useState } from 'react'
 import { Button, Container } from '@mui/material'
 import styles from '../styles/List.module.css'
 import Modal from 'react-modal'
+
+Modal.setAppElement('#__next')
 
 const customStyles = {
   content: {
