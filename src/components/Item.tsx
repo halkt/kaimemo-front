@@ -54,12 +54,7 @@ export default function Item({ item, type, onCheck, onInput }) {
       </span>
       <Modal isOpen={editModalIsOpen} style={customStyles}>
         <form onSubmit={handleSubmit}>
-          <input
-            className={item.purchased ? 'done-item' : ''}
-            type='text'
-            defaultValue={item.name}
-            onInput={handleInput}
-          />
+          <input type='text' defaultValue={item.name} onInput={handleInput} />
           <input type='text' defaultValue={item.icon} />
           <Button type='submit' variant='contained' color='primary'>
             change
